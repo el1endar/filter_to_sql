@@ -1,5 +1,5 @@
 from collections import OrderedDict
-# import time
+import time
 
 
 class Expression(object):
@@ -41,7 +41,6 @@ class Expression(object):
             return "Bad filter"
 
         operator = filter.split("(")[0]
-        print(f"Opertator: {operator}")
 
         if operator in self.multiple_condition_operators:
 
@@ -108,12 +107,11 @@ class Expression(object):
         list_of_filters = []
 
         filters = filter.split("),")
-        print(f"filters list: {filters}")
+        # print(f"filters list: {filters}")
 
         if len(filters) == 1:
-            # self.check_operator(work_dir=dict(), filter=filters[0])
+
             filter_dict = self.create_dict(filter=filters[0])
-            print(f"Filter dict {filter_dict}")
             return filter_dict
 
         list_number = 1
@@ -131,13 +129,8 @@ class Expression(object):
     def and_or(self, work_dir, pointer, filter, operator):
 
         work_dir.append(dict())
-        print(work_dir)
         work_dir[pointer][self.operators_dict.get(operator)] = list()
-        print(work_dir)
-        # work_dir = work_dir[0][self.operators_dict.get()]
         self.FILTER(new_filter=filter[len(operator) + 1:-1])
-        print(self.FILTER())
-        # self.filter = filter[len(operator)+1:-1]
 
         return work_dir
 
@@ -173,4 +166,3 @@ print(test_6)
 print("test7")
 test_7 = Expression(filter="and(eq(startDate,2021-01-03),gt(ownerName,55),not(between(startDate,2021-01-03,2021-04-20)))").resolve()
 print(test_7)
-
